@@ -1,0 +1,23 @@
+import requests
+
+def get_survey_numbers(district, mandal, village):
+    url = 'https://dharani.telangana.gov.in/app/search/surveyList'
+    data = {
+        'search_district': district,
+        'search_mandal': mandal,
+        'search_village': village
+    }
+    response = requests.post(url, data=data)
+    if response.status_code == 200:
+        survey_numbers = response.json()['survey_list']
+        print("Survey Numbers:")
+        for number in survey_numbers:
+            print(number)
+    else:
+        print("Error:", response.status_code)
+
+# Example usage:
+district = 'Adilabad'
+mandal = 'Adilabad'
+village = 'Adilabad'
+get_survey_numbers(district, mandal, village)
